@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPTV WAEL — Smart Pro Full</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:#010101;color:#fff}
+header{background:linear-gradient(180deg,#111,#000);padding:16px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #222}
+header h1{font-size:22px;font-weight:700;letter-spacing:1px}
+.badge-app{font-size:11px;color:#aaa}
+.home-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:22px;justify-items:center;margin:25px 16px}
+.big-card{background:#111;border:1px solid #222;border-radius:20px;padding:22px;cursor:pointer;min-height:160px;display:flex;flex-direction:column;justify-content:center;align-items:center;transition:.3s}
+.big-card:hover{background:#1a1a1a;transform:scale(1.06)}
+.big-card .icon{font-size:50px;margin-bottom:14px}
+.big-card .label{font-size:16px;font-weight:700;margin-bottom:6px;text-align:center}
+.big-card .count{font-size:12px;opacity:.6;text-align:center}
+.player{background:#000;border-radius:18px;padding:10px;margin-bottom:14px}
+iframe{border:0;border-radius:12px;width:100%;height:380px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:14px;margin-top:14px}
+.card{background:#111;border:1px solid #222;border-radius:14px;padding:10px;cursor:pointer;transition:.2s;text-align:center;overflow:hidden;position:relative}
+.card:hover{background:#1a1a1a;transform:scale(1.03)}
+.thumb{height:90px;border-radius:10px;background:#1e1e1e center/contain no-repeat;margin-bottom:8px}
+.title{font-size:12px;font-weight:600}
+.tag{font-size:10px;margin-top:4px;display:inline-block;padding:2px 8px;border-radius:10px;position:absolute;top:8px;right:8px}
+.live{background:#22c55e;color:#022}
+.premium{background:#fbbf24;color:#2c1a00}
+.back-btn{margin:10px 16px;border:0;background:#1a1a1a;color:#fff;padding:8px 12px;border-radius:12px;cursor:pointer;transition:.2s}
+.back-btn:hover{background:#22c55e;color:#022}
+.modal-bg{position:fixed;inset:0;background:#000a;display:none;align-items:center;justify-content:center;z-index:999}
+.modal{background:#111;border-radius:14px;padding:20px;width:92%;max-width:350px}
+.modal h3{margin-bottom:12px;font-weight:600}
+.modal input{width:100%;padding:12px;border:1px solid #333;border-radius:10px;background:#0a0a0a;color:#fff;margin-bottom:10px}
+.modal button{width:100%;padding:12px;border-radius:10px;border:0;background:#22c55e;color:#022;font-weight:700;cursor:pointer;transition:.2s}
+.modal button:hover{background:#16a34a;color:#fff}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>IPTV WAEL</h1>
+  <div class="badge-app">Smart Pro Full</div>
+</header>
+
+<div id="home" class="page active">
+  <div class="home-grid" id="home-grid"></div>
+</div>
+
+<div id="premium" class="page">
+  <button class="back-btn" onclick="showPage('home')">⬅ Home</button>
+  <div class="player"><iframe id="player-premium"></iframe></div>
+  <div class="grid" id="list-premium"></div>
+</div>
+
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <h3>Enter Premium Code</h3>
+    <input id="code" type="password" placeholder="••••••">
+    <button onclick="unlock()">Confirm</button>
+  </div>
+</div>
+
+<script>
+const CONFIG = {
+  sections:[
+    {
+      name:'Sports',
+      icon:'⚽',
+      premium:false,
+      channels:[
+        // ضع هنا روابط القنوات الرياضية 15 قناة
+        {title:'1 - Sports 1', url:'PUT_LINK_HERE_1'},
+        {title:'2 - Sports 2', url:'PUT_LINK_HERE_2'},
+        {title:'3 - Sports 3', url:'PUT_LINK_HERE_3'},
+        {title:'4 - Sports 4', url:'PUT_LINK_HERE_4'},
+        {title:'5 - Sports 5', url:'PUT_LINK_HERE_5'},
+        {title:'6 - Sports 6', url:'PUT_LINK_HERE_6'},
+        {title:'7 - Sports 7', url:'PUT_LINK_HERE_7'},
+        {title:'8 - Sports 8', url:'PUT_LINK_HERE_8'},
+        {title:'9 - Sports 9', url:'PUT_LINK_HERE_9'},
+        {title:'10 - Sports 10', url:'PUT_LINK_HERE_10'},
+        {title:'11 - Sports 11', url:'PUT_LINK_HERE_11'},
+        {title:'12 - Sports 12', url:'PUT_LINK_HERE_12'},
+        {title:'13 - Sports 13', url:'PUT_LINK_HERE_13'},
+        {title:'14 - Sports 14', url:'PUT_LINK_HERE_14'},
+        {title:'15 - Sports 15', url:'PUT_LINK_HERE_15'}
+      ]
+    },
+    {
+      name:'News',
+      icon:'📰',
+      premium:false,
+      channels:[
+        // ضع هنا روابط الأخبار 15 قناة
+        {title:'1 - News 1', url:'PUT_LINK_HERE_1'},
+        {title:'2 - News 2', url:'PUT_LINK_HERE_2'},
+        {title:'3 - News 3', url:'PUT_LINK_HERE_3'},
+        {title:'4 - News 4', url:'PUT_LINK_HERE_4'},
+        {title:'5 - News 5', url:'PUT_LINK_HERE_5'},
+        {title:'6 - News 6', url:'PUT_LINK_HERE_6'},
+        {title:'7 - News 7', url:'PUT_LINK_HERE_7'},
+        {title:'8 - News 8', url:'PUT_LINK_HERE_8'},
+        {title:'9 - News 9', url:'PUT_LINK_HERE_9'},
+        {title:'10 - News 10', url:'PUT_LINK_HERE_10'},
+        {title:'11 - News 11', url:'PUT_LINK_HERE_11'},
+        {title:'12 - News 12', url:'PUT_LINK_HERE_12'},
+        {title:'13 - News 13', url:'PUT_LINK_HERE_13'},
+        {title:'14 - News 14', url:'PUT_LINK_HERE_14'},
+        {title:'15 - News 15', url:'PUT_LINK_HERE_15'}
+      ]
+    },
+    {
+      name:'Films',
+      icon:'🎬',
+      premium:false,
+      channels:[
+        // ضع هنا روابط الأفلام 15 قناة
+        {title:'1 - Film 1', url:'PUT_LINK_HERE_1'},
+        {title:'2 - Film 2', url:'PUT_LINK_HERE_2'},
+        {title:'3 - Film 3', url:'PUT_LINK_HERE_3'},
+        {title:'4 - Film 4', url:'PUT_LINK_HERE_4'},
+        {title:'5 - Film 5', url:'PUT_LINK_HERE_5'},
+        {title:'6 - Film 6', url:'PUT_LINK_HERE_6'},
+        {title:'7 - Film 7', url:'PUT_LINK_HERE_7'},
+        {title:'8 - Film 8', url:'PUT_LINK_HERE_8'},
+        {title:'9 - Film 9', url:'PUT_LINK_HERE_9'},
+        {title:'10 - Film 10', url:'PUT_LINK_HERE_10'},
+        {title:'11 - Film 11', url:'PUT_LINK_HERE_11'},
+        {title:'12 - Film 12', url:'PUT_LINK_HERE_12'},
+        {title:'13 - Film 13', url:'PUT_LINK_HERE_13'},
+        {title:'14 - Film 14', url:'PUT_LINK_HERE_14'},
+        {title:'15 - Film 15', url:'PUT_LINK_HERE_15'}
+      ]
+    },
+    {
+      name:'Documentaries',
+      icon:'📺',
+      premium:false,
+      channels:[
+        // ضع هنا روابط الوثائقيات 15 قناة
+        {title:'1 - Doc 1', url:'PUT_LINK_HERE_1'},
+        {title:'2 - Doc 2', url:'PUT_LINK_HERE_2'},
+        {title:'3 - Doc 3', url:'PUT_LINK_HERE_3'},
+        {title:'4 - Doc 4', url:'PUT_LINK_HERE_4'},
+        {title:'5 - Doc 5', url:'PUT_LINK_HERE_5'},
+        {title:'6 - Doc 6', url:'PUT_LINK_HERE_6'},
+        {title:'7 - Doc 7', url:'PUT_LINK_HERE_7'},
+        {title:'8 - Doc 8', url:'PUT_LINK_HERE_8'},
+        {title:'9 - Doc 9', url:'PUT_LINK_HERE_9'},
+        {title:'10 - Doc 10', url:'PUT_LINK_HERE_10'},
+        {title:'11 - Doc 11', url:'PUT_LINK_HERE_11'},
+        {title:'12 - Doc 12', url:'PUT_LINK_HERE_12'},
+        {title:'13 - Doc 13', url:'PUT_LINK_HERE_13'},
+        {title:'14 - Doc 14', url:'PUT_LINK_HERE_14'},
+        {title:'15 - Doc 15', url:'PUT_LINK_HERE_15'}
+      ]
+    },
+    {
+      name:'Premium',
+      icon:'⭐',
+      premium:true,
+      channels:[
+        // ضع هنا روابط Premium 15 قناة
+        {title:'1 - Premium 1', url:'PUT_LINK_HERE_1'},
+        {title:'2 - Premium 2', url:'PUT_LINK_HERE_2'},
+        {title:'3 - Premium 3', url:'PUT_LINK_HERE_3'},
+        {title:'4 - Premium 4', url:'PUT_LINK_HERE_4'},
+        {title:'5 - Premium 5', url:'PUT_LINK_HERE_5'},
+        {title:'6 - Premium 6', url:'PUT_LINK_HERE_6'},
+        {title:'7 - Premium 7', url:'PUT_LINK_HERE_7'},
+        {title:'8 - Premium 8', url:'PUT_LINK_HERE_8'},
+        {title:'9 - Premium 9', url:'PUT_LINK_HERE_9'},
+        {title:'10 - Premium 10', url:'PUT_LINK_HERE_10'},
+        {title:'11 - Premium 11', url:'PUT_LINK_HERE_11'},
+        {title:'12 - Premium 12', url:'PUT_LINK_HERE_12'},
+        {title:'13 - Premium 13', url:'PUT_LINK_HERE_13'},
+        {title:'14 - Premium 14', url:'PUT_LINK_HERE_14'},
+        {title:'15 - Premium 15', url:'PUT_LINK_HERE_15'}
+      ]
+    }
+  ],
+  premiumCode:'061008'
+};
+
+// باقي السكربت كما هو
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function play(playerId,url){
+  document.getElementById(playerId).src = url+'?controls=1&modestbranding=1&rel=0&showinfo=0';
+}
+let wantedUrl=null;
+function askPremium(playerId,url){ wantedUrl={playerId,url}; document.getElementById('modal').style.display='flex'; }
+function unlock(){ 
+  const code=document.getElementById('code').value; 
+  if(code===CONFIG.premiumCode && wantedUrl){ 
+    document.getElementById('modal').style.display='none'; 
+    play(wantedUrl.playerId,wantedUrl.url); 
+  } 
+}
+
+// Render Home
+const homeGrid=document.getElementById('home-grid');
+CONFIG.sections.forEach(sec=>{
+  const card=document.createElement('div');
+  card.className='big-card';
+  card.innerHTML=`<div class='icon'>${sec.icon}</div><div class='label'>${sec.name}</div><div class='count'>${sec.channels.length} Channels</div>`;
+  card.onclick=()=>{
+    const id=sec.premium?'premium':'section-'+sec.name.toLowerCase();
+    if(sec.premium){
+      render(sec.channels,'list-premium','player-premium',true);
+      showPage('premium');
+    } else {
+      if(!document.getElementById(id)){
+        const div=document.createElement('div');
+        div.id=id;
+        div.className='page';
+        div.innerHTML=`<button class='back-btn' onclick="showPage('home')">⬅ Home</button><div class='player'><iframe id='player-${sec.name.toLowerCase()}'></iframe></div><div class='grid' id='list-${sec.name.toLowerCase()}'></div>`;
+        document.body.appendChild(div);
+        render(sec.channels,`list-${sec.name.toLowerCase()}`,'player-'+sec.name.toLowerCase());
+      }
+      showPage(id);
+    }
+  };
+  homeGrid.appendChild(card);
+});
+
+function render(list, wrapId, playerId, locked=false){
+  const box=document.getElementById(wrapId);
+  box.innerHTML='';
+  list.forEach((obj,i)=>{
+    const c=document.createElement('div');
+    c.className='card';
+    c.innerHTML=`<div class='thumb'></div><div class='title'>${obj.title}</div><span class='tag ${locked?'premium':'live'}'>${locked?'PREMIUM':'LIVE'}</span>`;
+    c.onclick=()=> locked? askPremium(playerId,obj.url):play(playerId,obj.url);
+    box.appendChild(c);
+  });
+  if(list[0]) play(playerId,list[0]);
+}
+</script>
+</body>
+</html>
