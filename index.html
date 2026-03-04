@@ -62,6 +62,14 @@ iframe{border:0;border-radius:12px;width:100%;height:380px}
   </div>
 </div>
 
+<div class="modal-bg" id="admin-modal">
+  <div class="modal">
+    <h3>Admin Login</h3>
+    <input id="admin-pass" type="password" placeholder="••••••">
+    <button onclick="unlockAdmin()">Login</button>
+  </div>
+</div>
+
 <script>
 const CONFIG = {
   sections:[
@@ -70,22 +78,21 @@ const CONFIG = {
       icon:'⚽',
       premium:false,
       channels:[
-        // ضع هنا روابط القنوات الرياضية 15 قناة
-        {title:'1 - Sports 1', url:'PUT_LINK_HERE_1'},
-        {title:'2 - Sports 2', url:'PUT_LINK_HERE_2'},
-        {title:'3 - Sports 3', url:'PUT_LINK_HERE_3'},
-        {title:'4 - Sports 4', url:'PUT_LINK_HERE_4'},
-        {title:'5 - Sports 5', url:'PUT_LINK_HERE_5'},
-        {title:'6 - Sports 6', url:'PUT_LINK_HERE_6'},
-        {title:'7 - Sports 7', url:'PUT_LINK_HERE_7'},
-        {title:'8 - Sports 8', url:'PUT_LINK_HERE_8'},
-        {title:'9 - Sports 9', url:'PUT_LINK_HERE_9'},
-        {title:'10 - Sports 10', url:'PUT_LINK_HERE_10'},
-        {title:'11 - Sports 11', url:'PUT_LINK_HERE_11'},
-        {title:'12 - Sports 12', url:'PUT_LINK_HERE_12'},
-        {title:'13 - Sports 13', url:'PUT_LINK_HERE_13'},
-        {title:'14 - Sports 14', url:'PUT_LINK_HERE_14'},
-        {title:'15 - Sports 15', url:'PUT_LINK_HERE_15'}
+        {title:'1 - Sports 1', url:''},
+        {title:'2 - Sports 2', url:''},
+        {title:'3 - Sports 3', url:''},
+        {title:'4 - Sports 4', url:''},
+        {title:'5 - Sports 5', url:''},
+        {title:'6 - Sports 6', url:''},
+        {title:'7 - Sports 7', url:''},
+        {title:'8 - Sports 8', url:''},
+        {title:'9 - Sports 9', url:''},
+        {title:'10 - Sports 10', url:''},
+        {title:'11 - Sports 11', url:''},
+        {title:'12 - Sports 12', url:''},
+        {title:'13 - Sports 13', url:''},
+        {title:'14 - Sports 14', url:''},
+        {title:'15 - Sports 15', url:''}
       ]
     },
     {
@@ -93,22 +100,21 @@ const CONFIG = {
       icon:'📰',
       premium:false,
       channels:[
-        // ضع هنا روابط الأخبار 15 قناة
-        {title:'1 - News 1', url:'PUT_LINK_HERE_1'},
-        {title:'2 - News 2', url:'PUT_LINK_HERE_2'},
-        {title:'3 - News 3', url:'PUT_LINK_HERE_3'},
-        {title:'4 - News 4', url:'PUT_LINK_HERE_4'},
-        {title:'5 - News 5', url:'PUT_LINK_HERE_5'},
-        {title:'6 - News 6', url:'PUT_LINK_HERE_6'},
-        {title:'7 - News 7', url:'PUT_LINK_HERE_7'},
-        {title:'8 - News 8', url:'PUT_LINK_HERE_8'},
-        {title:'9 - News 9', url:'PUT_LINK_HERE_9'},
-        {title:'10 - News 10', url:'PUT_LINK_HERE_10'},
-        {title:'11 - News 11', url:'PUT_LINK_HERE_11'},
-        {title:'12 - News 12', url:'PUT_LINK_HERE_12'},
-        {title:'13 - News 13', url:'PUT_LINK_HERE_13'},
-        {title:'14 - News 14', url:'PUT_LINK_HERE_14'},
-        {title:'15 - News 15', url:'PUT_LINK_HERE_15'}
+        {title:'1 - News 1', url:''},
+        {title:'2 - News 2', url:''},
+        {title:'3 - News 3', url:''},
+        {title:'4 - News 4', url:''},
+        {title:'5 - News 5', url:''},
+        {title:'6 - News 6', url:''},
+        {title:'7 - News 7', url:''},
+        {title:'8 - News 8', url:''},
+        {title:'9 - News 9', url:''},
+        {title:'10 - News 10', url:''},
+        {title:'11 - News 11', url:''},
+        {title:'12 - News 12', url:''},
+        {title:'13 - News 13', url:''},
+        {title:'14 - News 14', url:''},
+        {title:'15 - News 15', url:''}
       ]
     },
     {
@@ -116,22 +122,21 @@ const CONFIG = {
       icon:'🎬',
       premium:false,
       channels:[
-        // ضع هنا روابط الأفلام 15 قناة
-        {title:'1 - Film 1', url:'PUT_LINK_HERE_1'},
-        {title:'2 - Film 2', url:'PUT_LINK_HERE_2'},
-        {title:'3 - Film 3', url:'PUT_LINK_HERE_3'},
-        {title:'4 - Film 4', url:'PUT_LINK_HERE_4'},
-        {title:'5 - Film 5', url:'PUT_LINK_HERE_5'},
-        {title:'6 - Film 6', url:'PUT_LINK_HERE_6'},
-        {title:'7 - Film 7', url:'PUT_LINK_HERE_7'},
-        {title:'8 - Film 8', url:'PUT_LINK_HERE_8'},
-        {title:'9 - Film 9', url:'PUT_LINK_HERE_9'},
-        {title:'10 - Film 10', url:'PUT_LINK_HERE_10'},
-        {title:'11 - Film 11', url:'PUT_LINK_HERE_11'},
-        {title:'12 - Film 12', url:'PUT_LINK_HERE_12'},
-        {title:'13 - Film 13', url:'PUT_LINK_HERE_13'},
-        {title:'14 - Film 14', url:'PUT_LINK_HERE_14'},
-        {title:'15 - Film 15', url:'PUT_LINK_HERE_15'}
+        {title:'1 - Film 1', url:''},
+        {title:'2 - Film 2', url:''},
+        {title:'3 - Film 3', url:''},
+        {title:'4 - Film 4', url:''},
+        {title:'5 - Film 5', url:''},
+        {title:'6 - Film 6', url:''},
+        {title:'7 - Film 7', url:''},
+        {title:'8 - Film 8', url:''},
+        {title:'9 - Film 9', url:''},
+        {title:'10 - Film 10', url:''},
+        {title:'11 - Film 11', url:''},
+        {title:'12 - Film 12', url:''},
+        {title:'13 - Film 13', url:''},
+        {title:'14 - Film 14', url:''},
+        {title:'15 - Film 15', url:''}
       ]
     },
     {
@@ -139,22 +144,21 @@ const CONFIG = {
       icon:'📺',
       premium:false,
       channels:[
-        // ضع هنا روابط الوثائقيات 15 قناة
         {title:'2M VISION', url:'http://livecdnh2.tvanywhere.ae/hls/2m_maroc/04.m3u8'},
-        {title:'MBC 5', url:'https://www.youtube.com/embed/KyRMOxwD3b4?modestbranding=1&rel=0'},
-        {title:'VISION ISLAMIC', url:'PUT_LINK_HERE_3'},
-        {title:'aloula FHD', url:'https://www.youtube.com/live/CRtHpshOtqk?si=XNuMJV2GGQOttuc3'},
-        {title:'5 - Doc 5', url:'PUT_LINK_HERE_5'},
-        {title:'6 - Doc 6', url:'PUT_LINK_HERE_6'},
-        {title:'7 - Doc 7', url:'PUT_LINK_HERE_7'},
-        {title:'8 - Doc 8', url:'PUT_LINK_HERE_8'},
-        {title:'9 - Doc 9', url:'PUT_LINK_HERE_9'},
-        {title:'10 - Doc 10', url:'PUT_LINK_HERE_10'},
-        {title:'11 - Doc 11', url:'PUT_LINK_HERE_11'},
-        {title:'12 - Doc 12', url:'PUT_LINK_HERE_12'},
-        {title:'13 - Doc 13', url:'PUT_LINK_HERE_13'},
-        {title:'14 - Doc 14', url:'PUT_LINK_HERE_14'},
-        {title:'15 - Doc 15', url:'PUT_LINK_HERE_15'}
+        {title:'MBC 5', url:''},
+        {title:'VISION ISLAMIC', url:''},
+        {title:'aloula FHD', url:''},
+        {title:'5 - Doc 5', url:''},
+        {title:'6 - Doc 6', url:''},
+        {title:'7 - Doc 7', url:''},
+        {title:'8 - Doc 8', url:''},
+        {title:'9 - Doc 9', url:''},
+        {title:'10 - Doc 10', url:''},
+        {title:'11 - Doc 11', url:''},
+        {title:'12 - Doc 12', url:''},
+        {title:'13 - Doc 13', url:''},
+        {title:'14 - Doc 14', url:''},
+        {title:'15 - Doc 15', url:''}
       ]
     },
     {
@@ -162,29 +166,28 @@ const CONFIG = {
       icon:'⭐',
       premium:true,
       channels:[
-        // ضع هنا روابط Premium 15 قناة
-        {title:'1 - Premium 1', url:'PUT_LINK_HERE_1'},
-        {title:'2 - Premium 2', url:'PUT_LINK_HERE_2'},
-        {title:'3 - Premium 3', url:'PUT_LINK_HERE_3'},
-        {title:'4 - Premium 4', url:'PUT_LINK_HERE_4'},
-        {title:'5 - Premium 5', url:'PUT_LINK_HERE_5'},
-        {title:'6 - Premium 6', url:'PUT_LINK_HERE_6'},
-        {title:'7 - Premium 7', url:'PUT_LINK_HERE_7'},
-        {title:'8 - Premium 8', url:'PUT_LINK_HERE_8'},
-        {title:'9 - Premium 9', url:'PUT_LINK_HERE_9'},
-        {title:'10 - Premium 10', url:'PUT_LINK_HERE_10'},
-        {title:'11 - Premium 11', url:'PUT_LINK_HERE_11'},
-        {title:'12 - Premium 12', url:'PUT_LINK_HERE_12'},
-        {title:'13 - Premium 13', url:'PUT_LINK_HERE_13'},
-        {title:'14 - Premium 14', url:'PUT_LINK_HERE_14'},
-        {title:'15 - Premium 15', url:'PUT_LINK_HERE_15'}
+        {title:'1 - Premium 1', url:''},
+        {title:'2 - Premium 2', url:''},
+        {title:'3 - Premium 3', url:''},
+        {title:'4 - Premium 4', url:''},
+        {title:'5 - Premium 5', url:''},
+        {title:'6 - Premium 6', url:''},
+        {title:'7 - Premium 7', url:''},
+        {title:'8 - Premium 8', url:''},
+        {title:'9 - Premium 9', url:''},
+        {title:'10 - Premium 10', url:''},
+        {title:'11 - Premium 11', url:''},
+        {title:'12 - Premium 12', url:''},
+        {title:'13 - Premium 13', url:''},
+        {title:'14 - Premium 14', url:''},
+        {title:'15 - Premium 15', url:''}
       ]
     }
   ],
-  premiumCode:'061008'
+  premiumCode:'002233',
+  adminPass:'011001'
 };
 
-// باقي السكربت كما هو
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -200,6 +203,15 @@ function unlock(){
     document.getElementById('modal').style.display='none'; 
     play(wantedUrl.playerId,wantedUrl.url); 
   } 
+}
+
+function openAdmin(){ document.getElementById('admin-modal').style.display='flex'; }
+function unlockAdmin(){ 
+  const code=document.getElementById('admin-pass').value; 
+  if(code===CONFIG.adminPass){ 
+    alert('Admin Access Granted!'); 
+    document.getElementById('admin-modal').style.display='none'; 
+  } else { alert('Wrong Password!'); }
 }
 
 // Render Home
